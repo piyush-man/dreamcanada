@@ -80,6 +80,20 @@ class universities extends StatelessWidget {
   }
 }
 
+class unidetails extends StatelessWidget {
+  final uniname;
+  const unidetails(this.uniname);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey.shade300,
+        title: Text(uniname),
+      ),
+    );
+  }
+}
 
 
 
