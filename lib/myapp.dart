@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:untitled/courses.dart';
 import 'package:untitled/procedure.dart';
@@ -5,6 +6,7 @@ import 'package:untitled/requirements.dart';
 import 'package:untitled/scholarships.dart';
 import 'package:untitled/search.dart';
 import 'package:untitled/universities.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class dreamcanada extends StatefulWidget {
   @override
@@ -13,7 +15,9 @@ class dreamcanada extends StatefulWidget {
 
 var home = 0;
 final formKey = GlobalKey<FormState>();
-
+final formname = TextEditingController();
+final formemail = TextEditingController();
+final formcourse = TextEditingController();
 class _dreamcanadaState extends State<dreamcanada> {
   @override
   Widget build(BuildContext context) {
@@ -36,9 +40,9 @@ class _dreamcanadaState extends State<dreamcanada> {
       ),
       drawer: Drawer(
         elevation: 20.0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey.shade100,
         child: ListView(
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(top: 60.0),
           children: [
             ListTile(
               minVerticalPadding: 20.0,
@@ -98,11 +102,13 @@ class _dreamcanadaState extends State<dreamcanada> {
                 "Get Help !",
                 style: TextStyle(fontSize: 30.0, color: Colors.black),
               ),
-              onTap: () {},
+              onTap: () {setState((){home=2;});
+                Navigator.pop(context);},
             ),
           ],
         ),
       ),
+      resizeToAvoidBottomInset: false,
       body: Container(
         child: Column(
           children: [
@@ -134,8 +140,9 @@ class _dreamcanadaState extends State<dreamcanada> {
               ),
             ),
             GestureDetector(
-              onHorizontalDragUpdate: (details) {
-                if (details.delta.dx < 0) {
+              onHorizontalDragEnd: (details) {
+                var velo=details.velocity.pixelsPerSecond;
+                if (velo.dx < 0) {
                   setState(() {
                     if (home < 2) {
                       home = home + 1;
@@ -145,7 +152,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                   });
                 }
                 ;
-                if (details.delta.dx > 0) {
+                if (velo.dx > 0) {
                   setState(() {
                     if (home > 0) {
                       home = home - 1;
@@ -158,7 +165,7 @@ class _dreamcanadaState extends State<dreamcanada> {
               },
               child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 160.0,
+                  height: 0.74*MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.blueGrey.shade100,
@@ -172,7 +179,14 @@ class _dreamcanadaState extends State<dreamcanada> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () {},
+        onPressed: ()async {
+          var url = Uri.parse("mailto:assistant@dreamcanada.com");
+          if (await canLaunchUrl(url)) {
+          await launchUrl(url);
+          } else {
+          throw 'Could not launch $url';
+          }
+        },
         child: Icon(Icons.chat),
       ),
     );
@@ -309,7 +323,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                       width: 0.02 * MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white,
+                        color: Colors.teal,
                       ),
                       child: Text("")),
                 ),
@@ -499,7 +513,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                         width: 0.02 * MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white,
+                          color: Colors.teal,
                         ),
                         child: Text("")),
                   )),
@@ -524,15 +538,12 @@ class _dreamcanadaState extends State<dreamcanada> {
         ],
       );
     } else if (home == 2) {
-      final formname = TextEditingController();
-      final formemail = TextEditingController();
-      final formcourse = TextEditingController();
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Center(
               child: Text(
-            "GET UPDATES",
+            "GET HELP !",
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
           )),
           Form(
@@ -543,6 +554,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 60.0, vertical: 10.0),
                     child: TextFormField(
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -560,6 +572,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 60.0, vertical: 10.0),
                     child: TextFormField(
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -577,6 +590,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 60.0, vertical: 10.0),
                     child: TextFormField(
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -590,14 +604,19 @@ class _dreamcanadaState extends State<dreamcanada> {
                       controller: formcourse,
                     ),
                   ),
-                  ElevatedButton(
+                  RaisedButton(
+                    color: Colors.teal,
+                    splashColor: Colors.greenAccent,
+                    textColor: Colors.white,
+                    elevation: 5.0,
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Submitting Data')),
+                          const SnackBar(content: Text('Submitting Data'), backgroundColor: Colors.blueGrey,duration: Duration(seconds: 1),),
                         );
-                      }
-                      ;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Submitted'), backgroundColor: Colors.teal,duration: Duration(seconds: 1),),);
+                      };
                       debugPrint(formname.text);
                       debugPrint(formemail.text);
                       debugPrint(formcourse.text);
@@ -654,7 +673,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                         width: 0.02 * MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white,
+                          color: Colors.teal,
                         ),
                         child: Text("")),
                   )),

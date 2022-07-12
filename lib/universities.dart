@@ -73,6 +73,9 @@ class universities extends StatelessWidget {
           subtitle: Text(unilist[1][i]),
           leading: Icon(Icons.account_balance_outlined),
           trailing: Text("Rank: ${i+1}"),
+          onTap: (){Navigator.push(context,
+            MaterialPageRoute(builder: (context) => unidetails(i)),
+          );},
         );},
         itemCount: unilist[0].length,
       ),
@@ -81,15 +84,15 @@ class universities extends StatelessWidget {
 }
 
 class unidetails extends StatelessWidget {
-  final uniname;
-  const unidetails(this.uniname);
+  final i;
+  const unidetails(this.i);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade300,
-        title: Text(uniname),
+        title: Text(unilist[0][i]),
       ),
     );
   }
