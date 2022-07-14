@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 var reqlist=['IELTS Score',
   'Letter of Recommendation',
   'Statement Of Purpose',
-  'Academics Progress',
+  'Good Academics Progress',
   'GRE/GMAT/SAT Score',
   'Related Projects',
   'Experience',
@@ -33,14 +33,30 @@ class requirements extends StatelessWidget {
         Container(
           height: 0.76*MediaQuery.of(context).size.height,
           child: ListView.builder(
-          itemBuilder: (context,i){return ListTile(
+          itemBuilder: (context,i){  var sub= subtitle(i);
+            return ListTile(
             title: Text(reqlist[i]),
+            subtitle: sub,
             leading: Icon(Icons.shopping_bag_outlined),
-            onTap: (){},
           );},
           itemCount: reqlist.length,
       ),
         ),])
     );
+  }
+
+  subtitle(int i) {
+    if(i>4)
+      return Text("Mentioned in Resume");
+    else if(i==0)
+      return Text("6.5 or Above");
+    else if(i==1)
+      return Text("From School, Universities and Companies");
+    else if(i==3)
+      return Text("Minimum 75%");
+    else if(i==4)
+      return Text("Good Score boost your Selection Chances");
+    else
+      return Text("-");
   }
 }

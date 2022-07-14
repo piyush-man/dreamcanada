@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:untitled/webview.dart';
 
 class ielts extends StatelessWidget {
   @override
@@ -15,7 +15,7 @@ class ielts extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Text("GET BEST IELTS AND GRE STUDY MATERIAL @ JUST Rs.99", style: TextStyle(
+          child: Text("GET BEST IELTS AND GRE/GMAT STUDY MATERIAL @ JUST Rs.99", style: TextStyle(
             fontSize: 40.0,
             fontWeight: FontWeight.w600,
             fontStyle: FontStyle.italic,
@@ -26,13 +26,10 @@ class ielts extends StatelessWidget {
             color: Colors.blueGrey,
             textColor: Colors.white,
             elevation: 5.0,
-            onPressed: ()async {
-            var url = Uri.parse("https://pmny.in/vr2jGfuT45i2");
-            if (await canLaunchUrl(url)) {
-              await launchUrl(url);
-            } else {
-              throw 'Could not launch $url';
-            }
+            onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => MyWebView(title: 'Buy Study Material', selectedUrl: 'https://pmny.in/vr2jGfuT45i2')
+              ));
           },
           child: Text("BUY NOW"),),
               Padding(

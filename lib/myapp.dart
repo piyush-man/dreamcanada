@@ -6,6 +6,7 @@ import 'package:untitled/requirements.dart';
 import 'package:untitled/scholarships.dart';
 import 'package:untitled/search.dart';
 import 'package:untitled/universities.dart';
+import 'package:untitled/webview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class dreamcanada extends StatefulWidget {
@@ -300,10 +301,10 @@ class _dreamcanadaState extends State<dreamcanada> {
                       child: Column(
                     children: [
                       Icon(
-                        Icons.balance_rounded,
+                        Icons.laptop_chromebook_outlined,
                         size: 50.0,
                       ),
-                      Text("Law")
+                      Text("CS & IT")
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                   )),
@@ -549,6 +550,26 @@ class _dreamcanadaState extends State<dreamcanada> {
             "GET HELP !",
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
           )),
+          GestureDetector(
+            onTap: ()async {
+              var url = Uri.parse("instagram://user?username=dreamcanada_app");
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+            child: Container(
+              height: 50.0,
+              width: 300.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blueGrey.shade200,
+                borderRadius: BorderRadius.circular(25.0)
+              ),
+              child: Center(child: Text("Follow on Instagram"))
+            ),
+          ),
           Form(
               key: formKey,
               child: Column(

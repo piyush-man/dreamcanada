@@ -117,6 +117,66 @@ var unilist=[['McGill University',
     'https://www.uregina.ca/',
     'https://www.lakeheadu.ca/'
   ],
+  [
+    '31',
+    '34',
+    '47',
+    '110',
+    '152',
+    '154',
+    '172',
+    '237',
+    '242',
+    '246',
+    '308',
+    '328',
+    '359',
+    '433',
+    '456',
+    '473',
+    '555',
+    '575',
+    '595',
+    '625',
+    '675',
+    '725',
+    '750',
+    '775',
+    '900',
+    '1000',
+    '1100',
+    '1300',
+  ],
+  [
+    '16',
+    '18',
+    '6',
+    '6',
+    '13',
+    '22',
+    '12',
+    '17',
+    '13',
+    '8',
+    '11',
+    '21',
+    '4',
+    '10',
+    '12',
+    '5',
+    '14',
+    '17',
+    '9',
+    '14',
+    '8',
+    '6',
+    '3',
+    '15',
+    '18',
+    '15',
+    '7',
+    '16',
+  ]
 ];
 class universities extends StatelessWidget {
   const universities({Key? key}) : super(key: key);
@@ -160,11 +220,23 @@ class unidetails extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
-            child: Text("Location ${unilist[1][i]}, Canada",style: TextStyle(
+            child: Text("${unilist[1][i]}, Canada",style: TextStyle(
               fontSize: 30.0
             ),),
           ),
           Image.asset(unilist[2][i],width: MediaQuery.of(context).size.width),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 26.0),
+            child: Text("World Rank : ${unilist[4][i]}",style: TextStyle(
+                fontSize: 20.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold,
+            ),),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 36.0),
+            child: Text("Tuition Fees/Yr : ${unilist[5][i]},00,000 INR\n(Approx)",style: TextStyle(
+                fontSize: 20.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold,
+            ),),
+          ),
           GestureDetector(
             child: Container(
               height: 130.0,
@@ -179,13 +251,15 @@ class unidetails extends StatelessWidget {
             ),
             onTap: (){
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MyWebView(
-                  title: unilist[0][i],
-                  selectedUrl: unilist[3][i],
-                ),
+                builder: (BuildContext context) => MyWebView(title: unilist[0][i], selectedUrl: unilist[3][i])
             ));
           },),
-
+          Padding(
+            padding: const EdgeInsets.only(top: 36.0),
+            child: Text("Actual Expenses = Tuition Fees + Other University Charges + Living Expenses",style: TextStyle(
+              fontSize: 10.0, fontStyle: FontStyle.italic,
+            ),),
+          ),
         ],
       ),
     );
