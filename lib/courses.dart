@@ -8,6 +8,7 @@ class courses extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(name[num]),
+        centerTitle: true,
         backgroundColor: Colors.blueGrey.shade300,
       ),
     );

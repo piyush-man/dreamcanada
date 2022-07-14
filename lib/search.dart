@@ -96,20 +96,16 @@ class CustomSearchDelegate extends SearchDelegate {
         var result = matchQuery[index];
         return ListTile(
           title: Text(result),
-          onTap: convert(result,context),
+          onTap: (){
+            var i;
+            i=searchTerms.indexOf(result);
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => unidetails(i)),
+            );
+          }
         );
       },
     );
   }
 
-  convert(String str,BuildContext context) {
-    for (var i=0;i<unilist.length;i++)
-      {
-        if(unilist[0][i]==str){
-              (){Navigator.push(context,
-            MaterialPageRoute(builder: (context) => unidetails(i)),
-          );};
-        }
-      }
-  }
 }

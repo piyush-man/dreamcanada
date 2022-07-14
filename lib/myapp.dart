@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:untitled/courses.dart';
-import 'package:untitled/procedure.dart';
+import 'package:untitled/ielts.dart';
 import 'package:untitled/requirements.dart';
 import 'package:untitled/scholarships.dart';
 import 'package:untitled/search.dart';
@@ -86,13 +86,13 @@ class _dreamcanadaState extends State<dreamcanada> {
             ListTile(
               minVerticalPadding: 20.0,
               title: Text(
-                "Procedure",
+                "IELTS Prep",
                 style: TextStyle(fontSize: 30.0, color: Colors.black),
               ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => procedure()),
+                  MaterialPageRoute(builder: (context) => ielts()),
                 );
               },
             ),
@@ -115,18 +115,21 @@ class _dreamcanadaState extends State<dreamcanada> {
             Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
               child: GestureDetector(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 0.1 * MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(90.0),
-                          right: Radius.circular(90.0))),
-                  child: Center(
-                    child: Text(
-                      "Find your Dream university here",
-                      style: TextStyle(fontStyle: FontStyle.italic),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 0.1 * MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(90.0),
+                            right: Radius.circular(90.0))),
+                    child: Center(
+                      child: Text(
+                        "Find your Dream university here",
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
                     ),
                   ),
                 ),
@@ -459,7 +462,7 @@ class _dreamcanadaState extends State<dreamcanada> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => procedure()),
+                    MaterialPageRoute(builder: (context) => ielts()),
                   );
                 },
                 child: Container(
@@ -470,10 +473,10 @@ class _dreamcanadaState extends State<dreamcanada> {
                       child: Column(
                     children: [
                       Icon(
-                        Icons.screen_rotation_alt_outlined,
+                        Icons.pending_actions_outlined,
                         size: 50.0,
                       ),
-                      Text("Procedure")
+                      Text("IELTS")
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                   )),

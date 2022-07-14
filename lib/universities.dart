@@ -66,6 +66,7 @@ class universities extends StatelessWidget {
       appBar: AppBar(
         title: Text("Top Universities"),
         backgroundColor: Colors.blueGrey.shade300,
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemBuilder: (context,i){return ListTile(
