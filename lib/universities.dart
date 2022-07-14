@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/webview.dart';
 
 var unilist=[['McGill University',
   'University of Toronto',
@@ -55,7 +56,67 @@ var unilist=[['McGill University',
     'Toronto',
     'St. Catharines',
     'Regina',
-    'Thunder Bay']
+    'Thunder Bay'],
+  [
+    'assets/images/p1.jpg',
+    'assets/images/p2.jpg',
+    'assets/images/p3.jpg',
+    'assets/images/p4.jpg',
+    'assets/images/p5.jpg',
+    'assets/images/p6.jpg',
+    'assets/images/p7.jpg',
+    'assets/images/p8.jpg',
+    'assets/images/p9.jpg',
+    'assets/images/p10.jpg',
+    'assets/images/p11.jpg',
+    'assets/images/p12.jpg',
+    'assets/images/p13.jpg',
+    'assets/images/p14.jpg',
+    'assets/images/p15.jpg',
+    'assets/images/p16.jpg',
+    'assets/images/p17.jpg',
+    'assets/images/p18.jpg',
+    'assets/images/p19.jpg',
+    'assets/images/p20.jpg',
+    'assets/images/p21.jpg',
+    'assets/images/p22.jpg',
+    'assets/images/p23.jpg',
+    'assets/images/p24.jpg',
+    'assets/images/p25.jpg',
+    'assets/images/p26.jpg',
+    'assets/images/p27.jpg',
+    'assets/images/p28.jpg',
+  ],
+  [
+    'https://www.mcgill.ca/',
+    'https://www.utoronto.ca/',
+    'https://www.ubc.ca/',
+    'https://www.ualberta.ca/',
+    'https://www.mcmaster.ca/',
+    'https://uwaterloo.ca/',
+    'https://www.uwo.ca/',
+    'https://www2.uottawa.ca/en',
+    'https://www.ucalgary.ca/',
+    'https://www.queensu.ca/',
+    'https://www.dal.ca/',
+    'https://www.sfu.ca/',
+    'https://www.uvic.ca/',
+    'https://www.ulaval.ca/en',
+    'https://www.yorku.ca/',
+    'https://www.usask.ca/',
+    'https://www.concordia.ca/',
+    'https://www.uquebec.ca/',
+    'https://www.uoguelph.ca/',
+    'https://carleton.ca/',
+    'https://umanitoba.ca/',
+    'https://www.unb.ca/',
+    'https://www.mun.ca/',
+    'https://www.uwindsor.ca/',
+    'https://www.torontomu.ca/',
+    'https://brocku.ca/',
+    'https://www.uregina.ca/',
+    'https://www.lakeheadu.ca/'
+  ],
 ];
 class universities extends StatelessWidget {
   const universities({Key? key}) : super(key: key);
@@ -94,6 +155,38 @@ class unidetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade300,
         title: Text(unilist[0][i]),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: Text("Location ${unilist[1][i]}, Canada",style: TextStyle(
+              fontSize: 30.0
+            ),),
+          ),
+          Image.asset(unilist[2][i],width: MediaQuery.of(context).size.width),
+          GestureDetector(
+            child: Container(
+              height: 130.0,
+              width: 250.0,
+              child: Center(child: Text("KNOW MORE",style: TextStyle(color: Colors.white,
+                fontSize: 20.0,fontStyle: FontStyle.italic,fontWeight: FontWeight.w600
+              ),)),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade300,
+                borderRadius: BorderRadius.circular(20.0)
+              ),
+            ),
+            onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => MyWebView(
+                  title: unilist[0][i],
+                  selectedUrl: unilist[3][i],
+                ),
+            ));
+          },),
+
+        ],
       ),
     );
   }

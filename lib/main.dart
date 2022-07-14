@@ -26,7 +26,7 @@ class _State extends State<DisplayLogo> {
     return Container(
         color: Colors.white,
         child: Center(
-          child: Image.asset("assets/images/logo.jpeg",height: 300,width: 300,),
+          child: Image.asset("assets/images/canada.png",height: 300,width: 300,),
         ));
   }
 }
