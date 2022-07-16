@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/universities.dart';
+
 class CustomSearchDelegate extends SearchDelegate {
   // Demo list to show querying
-  List<String> searchTerms = ['McGill University',
+  List<String> searchTerms = [
+    'McGill University',
     'University of Toronto',
     'University of British Columbia',
     'University of Alberta',
@@ -29,7 +31,8 @@ class CustomSearchDelegate extends SearchDelegate {
     'Toronto Metropolitan University',
     'Brock University',
     'University of Regina',
-    'Lakehead University'];
+    'Lakehead University'
+  ];
 
   // first overwrite to
   // clear the search text
@@ -71,10 +74,12 @@ class CustomSearchDelegate extends SearchDelegate {
         var result = matchQuery[index];
         return ListTile(
           title: Text(result),
-          onTap: (){Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => unidetails(result)),
-          );},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => unidetails(result)),
+            );
+          },
         );
       },
     );
@@ -95,17 +100,16 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          title: Text(result),
-          onTap: (){
-            var i;
-            i=searchTerms.indexOf(result);
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context) => unidetails(i)),
-            );
-          }
-        );
+            title: Text(result),
+            onTap: () {
+              var i;
+              i = searchTerms.indexOf(result);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => unidetails(i)),
+              );
+            });
       },
     );
   }
-
 }

@@ -1,35 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/webview.dart';
 
-var unilist=[['McGill University',
-  'University of Toronto',
-  'University of British Columbia',
-  'University of Alberta',
-  'McMaster University',
-  'University of Waterloo',
-  'Western University',
-  'University of Ottawa',
-  'University of Calgary',
-  'Queen\'s University at Kingston',
-  'Dalhousie University',
-  'Simon Fraser University',
-  'University of Victoria',
-  'Universite Laval',
-  'York University',
-  'University of Saskatchewan',
-  'Cancordia University',
-  'Universite du Quebec',
-  'University of Guelph',
-  'Carleton University',
-  'University of Manitoba',
-  'University of New Brunswick',
-  'Memorial University of Newfoundland',
-  'University of Windsor',
-  'Toronto Metropolitan University',
-  'Brock University',
-  'University of Regina',
-  'Lakehead University'],
-  ['Montreal',
+var unilist = [
+  [
+    'McGill University',
+    'University of Toronto',
+    'University of British Columbia',
+    'University of Alberta',
+    'McMaster University',
+    'University of Waterloo',
+    'Western University',
+    'University of Ottawa',
+    'University of Calgary',
+    'Queen\'s University at Kingston',
+    'Dalhousie University',
+    'Simon Fraser University',
+    'University of Victoria',
+    'Universite Laval',
+    'York University',
+    'University of Saskatchewan',
+    'Cancordia University',
+    'Universite du Quebec',
+    'University of Guelph',
+    'Carleton University',
+    'University of Manitoba',
+    'University of New Brunswick',
+    'Memorial University of Newfoundland',
+    'University of Windsor',
+    'Toronto Metropolitan University',
+    'Brock University',
+    'University of Regina',
+    'Lakehead University'
+  ],
+  [
+    'Montreal',
     'Toronto',
     'Vancouver',
     'Alberta',
@@ -56,7 +60,8 @@ var unilist=[['McGill University',
     'Toronto',
     'St. Catharines',
     'Regina',
-    'Thunder Bay'],
+    'Thunder Bay'
+  ],
   [
     'assets/images/p1.jpg',
     'assets/images/p2.jpg',
@@ -178,6 +183,7 @@ var unilist=[['McGill University',
     '16',
   ]
 ];
+
 class universities extends StatelessWidget {
   const universities({Key? key}) : super(key: key);
 
@@ -190,15 +196,20 @@ class universities extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView.builder(
-        itemBuilder: (context,i){return ListTile(
-          title: Text(unilist[0][i]),
-          subtitle: Text(unilist[1][i]),
-          leading: Icon(Icons.account_balance_outlined),
-          trailing: Text("Rank: ${i+1}"),
-          onTap: (){Navigator.push(context,
-            MaterialPageRoute(builder: (context) => unidetails(i)),
-          );},
-        );},
+        itemBuilder: (context, i) {
+          return ListTile(
+            title: Text(unilist[0][i]),
+            subtitle: Text(unilist[1][i]),
+            leading: Icon(Icons.account_balance_outlined),
+            trailing: Text("Rank: ${i + 1}"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => unidetails(i)),
+              );
+            },
+          );
+        },
         itemCount: unilist[0].length,
       ),
     );
@@ -216,55 +227,76 @@ class unidetails extends StatelessWidget {
         backgroundColor: Colors.blueGrey.shade300,
         title: Text(unilist[0][i]),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: Text("${unilist[1][i]}, Canada",style: TextStyle(
-              fontSize: 30.0
-            ),),
-          ),
-          Image.asset(unilist[2][i],width: MediaQuery.of(context).size.width),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 26.0),
-            child: Text("World Rank : ${unilist[4][i]}",style: TextStyle(
-                fontSize: 20.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold,
-            ),),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 36.0),
-            child: Text("Tuition Fees/Yr : ${unilist[5][i]},00,000 INR\n(Approx)",style: TextStyle(
-                fontSize: 20.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold,
-            ),),
-          ),
-          GestureDetector(
-            child: Container(
-              height: 130.0,
-              width: 250.0,
-              child: Center(child: Text("KNOW MORE",style: TextStyle(color: Colors.white,
-                fontSize: 20.0,fontStyle: FontStyle.italic,fontWeight: FontWeight.w600
-              ),)),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey.shade300,
-                borderRadius: BorderRadius.circular(20.0)
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                "${unilist[1][i]}, Canada",
+                style: TextStyle(fontSize: 30.0),
               ),
             ),
-            onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MyWebView(title: unilist[0][i], selectedUrl: unilist[3][i])
-            ));
-          },),
-          Padding(
-            padding: const EdgeInsets.only(top: 36.0),
-            child: Text("Actual Expenses = Tuition Fees + Other University Charges + Living Expenses",style: TextStyle(
-              fontSize: 10.0, fontStyle: FontStyle.italic,
-            ),),
-          ),
-        ],
+            Image.asset(unilist[2][i],
+                width: MediaQuery.of(context).size.width),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 26.0),
+              child: Text(
+                "World Rank : ${unilist[4][i]}",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 36.0),
+              child: Text(
+                "Tuition Fees/Yr : ${unilist[5][i]},00,000 INR\n(Approx)",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            GestureDetector(
+              child: Container(
+                height: 130.0,
+                width: 250.0,
+                child: Center(
+                    child: Text(
+                  "KNOW MORE",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w600),
+                )),
+                decoration: BoxDecoration(
+                    color: Colors.teal,
+                    borderRadius: BorderRadius.circular(20.0)),
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => MyWebView(
+                        title: unilist[0][i], selectedUrl: unilist[3][i])));
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 36.0),
+              child: Text(
+                "Actual Expenses = Tuition Fees + Other University Charges + Living Expenses",
+                style: TextStyle(
+                  fontSize: 10.0,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
-
-

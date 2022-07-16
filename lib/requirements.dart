@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-var reqlist=['IELTS Score',
+
+var reqlist = [
+  'IELTS Score',
   'Letter of Recommendation',
   'Statement Of Purpose',
   'Good Academics Progress',
@@ -11,6 +13,7 @@ var reqlist=['IELTS Score',
   'Research Papers',
   'Extracurricular Activities'
 ];
+
 class requirements extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,41 +23,30 @@ class requirements extends StatelessWidget {
         backgroundColor: Colors.blueGrey.shade300,
         centerTitle: true,
       ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.start,
-          children: [Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Text("Some of the requirements that will definitely"
-              " boost your admission chances to Top Universities are:",style: TextStyle(
-                fontSize: 20.0,fontWeight: FontWeight.bold
-              ),),
-            ),
-          ),
-        Container(
-          height: 0.76*MediaQuery.of(context).size.height,
-          child: ListView.builder(
-          itemBuilder: (context,i){  var sub= subtitle(i);
-            return ListTile(
+      body: ListView.builder(
+        itemBuilder: (context, i) {
+          var sub = subtitle(i);
+          return ListTile(
             title: Text(reqlist[i]),
             subtitle: sub,
             leading: Icon(Icons.shopping_bag_outlined),
-          );},
-          itemCount: reqlist.length,
+          );
+        },
+        itemCount: reqlist.length,
       ),
-        ),])
     );
   }
 
   subtitle(int i) {
-    if(i>4)
+    if (i > 4)
       return Text("Mentioned in Resume");
-    else if(i==0)
+    else if (i == 0)
       return Text("6.5 or Above");
-    else if(i==1)
+    else if (i == 1)
       return Text("From School, Universities and Companies");
-    else if(i==3)
+    else if (i == 3)
       return Text("Minimum 75%");
-    else if(i==4)
+    else if (i == 4)
       return Text("Good Score boost your Selection Chances");
     else
       return Text("-");

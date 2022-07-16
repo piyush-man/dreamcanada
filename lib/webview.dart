@@ -13,20 +13,20 @@ class MyWebView extends StatefulWidget {
   });
 
   @override
-  State<MyWebView> createState() => MyWebViewstate(title,selectedUrl);
+  State<MyWebView> createState() => MyWebViewstate(title, selectedUrl);
 }
 
 class MyWebViewstate extends State<MyWebView> {
-
   late final String title;
   late final String selectedUrl;
-  bool isLoading=true;
+  bool isLoading = true;
 
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
+  final Completer<WebViewController> _controller =
+      Completer<WebViewController>();
 
-  MyWebViewstate(String title, String selectedUrl){
-    this.title=title;
-    this.selectedUrl=selectedUrl;
+  MyWebViewstate(String title, String selectedUrl) {
+    this.title = title;
+    this.selectedUrl = selectedUrl;
   }
 
   @override
@@ -36,19 +36,24 @@ class MyWebViewstate extends State<MyWebView> {
         title: Text(title),
         backgroundColor: Colors.blueGrey.shade300,
       ),
-      body: Stack(children: [WebView(
-        initialUrl: selectedUrl,
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
-        },
-        onPageStarted: (finish) {
-          setState(() {
-            isLoading = false;
-          });
-        },
-      ),
-      isLoading ? Center( child: CircularProgressIndicator(),) : Stack(),
+      body: Stack(children: [
+        WebView(
+          initialUrl: selectedUrl,
+          javascriptMode: JavascriptMode.unrestricted,
+          onWebViewCreated: (WebViewController webViewController) {
+            _controller.complete(webViewController);
+          },
+          onPageStarted: (finish) {
+            setState(() {
+              isLoading = false;
+            });
+          },
+        ),
+        isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Stack(),
       ]),
     );
   }
