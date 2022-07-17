@@ -198,7 +198,7 @@ class universities extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, i) {
           return ListTile(
-            title: Text(unilist[0][i]),
+            title: Text(unilist[0][i],style: TextStyle(fontWeight: FontWeight.w500),),
             subtitle: Text(unilist[1][i]),
             leading: Icon(Icons.account_balance_outlined),
             trailing: Text("Rank: ${i + 1}"),

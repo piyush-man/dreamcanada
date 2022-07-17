@@ -19,7 +19,7 @@ class ielts extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 50.0),
                   child: Text(
-                    "GET BEST IELTS AND GRE/GMAT STUDY MATERIAL @ JUST Rs.99",
+                    "GET BEST IELTS/GRE STUDY MATERIAL @ JUST Rs.109",
                     style: TextStyle(
                       fontSize: 40.0,
                       fontWeight: FontWeight.w600,
@@ -27,17 +27,29 @@ class ielts extends StatelessWidget {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  color: Colors.teal,
-                  textColor: Colors.white,
-                  elevation: 5.0,
-                  onPressed: () {
+                GestureDetector(
+                  child: Container(
+                    height: 130.0,
+                    width: 250.0,
+                    child: Center(
+                        child: Text(
+                      "BUY NOW",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w600),
+                    )),
+                    decoration: BoxDecoration(
+                        color: Colors.teal,
+                        borderRadius: BorderRadius.circular(20.0)),
+                  ),
+                  onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => MyWebView(
                             title: 'Buy Study Material',
-                            selectedUrl: 'https://pmny.in/vr2jGfuT45i2')));
+                            selectedUrl: 'https://pmny.in/1IfNqvxPtgB3')));
                   },
-                  child: Text("BUY NOW"),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(

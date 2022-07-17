@@ -38,6 +38,7 @@ class MyWebViewstate extends State<MyWebView> {
       ),
       body: Stack(children: [
         WebView(
+          gestureNavigationEnabled: true,
           initialUrl: selectedUrl,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/courses.dart';
 import 'package:untitled/ielts.dart';
@@ -43,6 +44,7 @@ class _dreamcanadaState extends State<dreamcanada> {
         child: ListView(
           padding: EdgeInsets.only(top: 60.0),
           children: [
+            Image.asset("assets/images/canada.png", height: 150),
             ListTile(
               minVerticalPadding: 20.0,
               title: Text(
@@ -124,7 +126,6 @@ class _dreamcanadaState extends State<dreamcanada> {
           ],
         ),
       ),
-      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -198,7 +199,7 @@ class _dreamcanadaState extends State<dreamcanada> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
         onPressed: () async {
-          var url = Uri.parse("mailto:dreamcanada@fanclub.pm");
+          var url = Uri.parse("mailto:dreamcanada.app@gmail.com");
           if (await canLaunchUrl(url)) {
             await launchUrl(url);
           } else {
@@ -599,92 +600,126 @@ class _dreamcanadaState extends State<dreamcanada> {
                 style: TextStyle(color: Colors.white),
               ))),
         ),
-        Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 60.0, vertical: 10.0),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'NAME',
+        SingleChildScrollView(
+          child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 60.0, vertical: 10.0),
+                    child: TextFormField(
+                      textCapitalization: TextCapitalization.words,
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.face),
+                        border: OutlineInputBorder(),
+                        hintText: 'NAME',
+                      ),
+                      controller: formname,
                     ),
-                    controller: formname,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 60.0, vertical: 10.0),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'EMAIL',
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 60.0, vertical: 10.0),
+                    child: TextFormField(
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        if (!value.contains('@')) {
+                          return 'Email is invalid';
+                        }
+                        if (!value.contains('.')) {
+                          return 'Email is invalid';
+                        }
+                        if (!value.contains(RegExp(r'(\w+)'))) {
+                          return 'Email is invalid';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.mail_outline),
+                        border: OutlineInputBorder(),
+                        hintText: 'EMAIL',
+                      ),
+                      controller: formemail,
                     ),
-                    controller: formemail,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 60.0, vertical: 10.0),
-                  child: TextFormField(
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'COURSE',
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 60.0, vertical: 10.0),
+                    child: TextFormField(
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        if (value.length < 5) {
+                          return 'Please enter more words';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.help_outline_outlined),
+                        border: OutlineInputBorder(),
+                        hintText: 'QUERY',
+                      ),
+                      controller: formcourse,
                     ),
-                    controller: formcourse,
                   ),
-                ),
-                RaisedButton(
-                  color: Colors.teal,
-                  splashColor: Colors.greenAccent,
-                  textColor: Colors.white,
-                  elevation: 5.0,
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Submitting Data'),
-                          backgroundColor: Colors.blueGrey,
-                          duration: Duration(seconds: 1),
-                        ),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Submitted'),
-                          backgroundColor: Colors.teal,
-                          duration: Duration(seconds: 1),
-                        ),
-                      );
-                    }
-                    ;
-                  },
-                  child: const Text('Submit'),
-                ),
-              ],
-            )),
+                  RaisedButton(
+                    color: Colors.teal,
+                    splashColor: Colors.greenAccent,
+                    textColor: Colors.white,
+                    elevation: 5.0,
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        String message;
+                        var col;
+                        try {
+                          final collection =
+                              FirebaseFirestore.instance.collection('feedback');
+                          await collection.doc().set({
+                            'Name': formname.text,
+                            'Query': formcourse.text,
+                            'Email': formemail.text,
+                          });
+                          message = 'Submitted';
+                          col = Colors.green;
+                        } catch (e) {
+                          message = 'Error!';
+                          col = Colors.red;
+                        }
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Submitting Data'),
+                            backgroundColor: Colors.blueGrey,
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(message),
+                            backgroundColor: col,
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Submit'),
+                  ),
+                ],
+              )),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
