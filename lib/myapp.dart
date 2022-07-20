@@ -6,6 +6,7 @@ import 'package:untitled/requirements.dart';
 import 'package:untitled/scholarships.dart';
 import 'package:untitled/search.dart';
 import 'package:untitled/universities.dart';
+import 'package:untitled/webview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class dreamcanada extends StatefulWidget {
@@ -49,7 +50,7 @@ class _dreamcanadaState extends State<dreamcanada> {
               minVerticalPadding: 20.0,
               title: Text(
                 "Requirements",
-                style: TextStyle(fontSize: 30.0, color: Colors.teal),
+                style: TextStyle(fontSize: 30.0),
               ),
               onTap: () {
                 Navigator.push(
@@ -62,7 +63,7 @@ class _dreamcanadaState extends State<dreamcanada> {
               minVerticalPadding: 20.0,
               title: Text(
                 "Top Universities",
-                style: TextStyle(fontSize: 30.0, color: Colors.teal),
+                style: TextStyle(fontSize: 30.0),
               ),
               onTap: () {
                 Navigator.push(
@@ -75,7 +76,7 @@ class _dreamcanadaState extends State<dreamcanada> {
               minVerticalPadding: 20.0,
               title: Text(
                 "Scholarships",
-                style: TextStyle(fontSize: 30.0, color: Colors.teal),
+                style: TextStyle(fontSize: 30.0),
               ),
               onTap: () {
                 Navigator.push(
@@ -88,7 +89,7 @@ class _dreamcanadaState extends State<dreamcanada> {
               minVerticalPadding: 20.0,
               title: Text(
                 "IELTS Prep",
-                style: TextStyle(fontSize: 30.0, color: Colors.teal),
+                style: TextStyle(fontSize: 30.0),
               ),
               onTap: () {
                 Navigator.push(
@@ -101,7 +102,7 @@ class _dreamcanadaState extends State<dreamcanada> {
               minVerticalPadding: 20.0,
               title: Text(
                 "Courses",
-                style: TextStyle(fontSize: 30.0, color: Colors.teal),
+                style: TextStyle(fontSize: 30.0),
               ),
               onTap: () {
                 setState(() {
@@ -113,8 +114,8 @@ class _dreamcanadaState extends State<dreamcanada> {
             ListTile(
               minVerticalPadding: 20.0,
               title: Text(
-                "Get Help !",
-                style: TextStyle(fontSize: 30.0, color: Colors.teal),
+                "Get Updates",
+                style: TextStyle(fontSize: 30.0),
               ),
               onTap: () {
                 setState(() {
@@ -123,6 +124,19 @@ class _dreamcanadaState extends State<dreamcanada> {
                 Navigator.pop(context);
               },
             ),
+            ListTile(
+                minVerticalPadding: 20.0,
+                title: Text(
+                  "Terms & Conditions",
+                  style: TextStyle(fontSize: 30.0),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => MyWebView(
+                          title: "Terms & Conditions",
+                          selectedUrl:
+                              "https://www.app-privacy-policy.com/live.php?token=eYXePb6Eqc0NYejx2eAE5uE5qdJVMceY")));
+                }),
           ],
         ),
       ),
@@ -575,7 +589,7 @@ class _dreamcanadaState extends State<dreamcanada> {
       children: [
         Center(
             child: Text(
-          "GET HELP !",
+          "GET UPDATES",
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
         )),
         GestureDetector(
@@ -614,6 +628,9 @@ class _dreamcanadaState extends State<dreamcanada> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
+                        }
+                        if (value.length < 2) {
+                          return 'Too short to Proceed';
                         }
                         return null;
                       },
@@ -663,15 +680,15 @@ class _dreamcanadaState extends State<dreamcanada> {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
                         }
-                        if (value.length < 5) {
-                          return 'Please enter more words';
+                        if (value.length < 2) {
+                          return 'Too short to Proceed';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.help_outline_outlined),
+                        prefixIcon: Icon(Icons.book_outlined),
                         border: OutlineInputBorder(),
-                        hintText: 'QUERY',
+                        hintText: 'COURSE',
                       ),
                       controller: formcourse,
                     ),
@@ -690,11 +707,11 @@ class _dreamcanadaState extends State<dreamcanada> {
                               FirebaseFirestore.instance.collection('feedback');
                           await collection.doc().set({
                             'Name': formname.text,
-                            'Query': formcourse.text,
+                            'Course': formcourse.text,
                             'Email': formemail.text,
                           });
                           message = 'Submitted';
-                          col = Colors.green;
+                          col = Colors.teal;
                         } catch (e) {
                           message = 'Error!';
                           col = Colors.red;
